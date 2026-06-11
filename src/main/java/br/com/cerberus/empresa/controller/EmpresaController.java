@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/empresas")
@@ -23,5 +24,23 @@ public class EmpresaController {
     @GetMapping
     public List<Empresa> listar() {
         return service.listar();
+    }
+
+    @GetMapping("/{id}")
+    public Empresa buscarPorId(@PathVariable UUID id) {
+        return service.buscarPorId(id);
+    }
+
+    @PutMapping("/{id}")
+    public Empresa atualizar(
+            @PathVariable UUID id,
+            @RequestBody EmpresaRequest request) {
+
+        return service.atualizar(id, request);
+    }
+
+    @DeleteMapping("/{id}")
+    public void remover(@PathVariable UUID id) {
+        service.remover(id);
     }
 }
