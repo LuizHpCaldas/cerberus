@@ -1,43 +1,36 @@
 package br.com.cerberus.empresa.entity;
 
+import br.com.cerberus.shared.entity.BaseEntity;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import java.time.LocalDateTime;
 import java.util.UUID;
 
-@Entity
-@Table(name = "empresa")
 @Getter
 @Setter
+@Entity
+@Table(name = "empresa")
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-public class Empresa {
+public class Empresa extends BaseEntity {
 
     @Id
     private UUID id;
 
-    @Column(name = "razao_social")
+    @Column(nullable = false)
     private String razaoSocial;
 
-    @Column(name = "nome_fantasia")
     private String nomeFantasia;
 
+    @Column(nullable = false, unique = true)
     private String cnpj;
 
-    @Column(name = "inscricao_estadual")
     private String inscricaoEstadual;
 
     private String telefone;
 
     private String email;
-
-    private Boolean ativo;
-
-    @Column(name = "created_at")
-    private LocalDateTime createdAt;
-
-    @Column(name = "updated_at")
-    private LocalDateTime updatedAt;
 }

@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -17,18 +18,23 @@ public class EmpresaService {
 
     public Empresa criar(EmpresaRequest request) {
 
-        Empresa empresa = Empresa.builder()
-                .id(UUID.randomUUID())
-                .razaoSocial(request.razaoSocial())
-                .nomeFantasia(request.nomeFantasia())
-                .cnpj(request.cnpj())
-                .inscricaoEstadual(request.inscricaoEstadual())
-                .telefone(request.telefone())
-                .email(request.email())
-                .ativo(true)
-                .createdAt(LocalDateTime.now())
-                .build();
+        Empresa empresa = new Empresa();
+
+        empresa.setId(UUID.randomUUID());
+        empresa.setRazaoSocial(request.razaoSocial());
+        empresa.setNomeFantasia(request.nomeFantasia());
+        empresa.setCnpj(request.cnpj());
+        empresa.setInscricaoEstadual(request.inscricaoEstadual());
+        empresa.setTelefone(request.telefone());
+        empresa.setEmail(request.email());
+
+        empresa.setAtivo(true);
+        empresa.setCreatedAt(LocalDateTime.now());
 
         return repository.save(empresa);
+    }
+
+    public List<Empresa> listar() {
+        return repository.findAll();
     }
 }
