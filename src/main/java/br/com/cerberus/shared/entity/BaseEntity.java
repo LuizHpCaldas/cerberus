@@ -2,7 +2,6 @@ package br.com.cerberus.shared.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,6 +13,9 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @MappedSuperclass
+@SuperBuilder
+@NoArgsConstructor
+@AllArgsConstructor
 public abstract class BaseEntity {
 
     @Column(nullable = false)
@@ -23,5 +25,4 @@ public abstract class BaseEntity {
     private LocalDateTime createdAt;
 
     private LocalDateTime updatedAt;
-
 }
